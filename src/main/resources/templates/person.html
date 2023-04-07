@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="~{fragments/header::header}"/>
+  </head>
+<body>
+<nav th:replace="~{fragments/header :: nav}"/>
+
+<div class="container">
+  <div class="row">
+    <h1>更新会员 </h1>
+  </div>
+</div>
+
+<form th:action="@{'/person/save'}" th:object="${person}" method="post">
+  <div class="form-group">
+    <label for="username">会员姓名</label>
+    <input type="text" class="form-control" th:field="*{username}" id="username"  >
+    <label for="phoneNum">联系电话</label>
+    <input type="text" class="form-control" th:field="*{phoneNum}" id="phoneNum"  >
+    <label for="wechat">微信号码</label>
+    <input type="text" class="form-control"  th:field="*{wechat}" id="wechat">
+    <label for="email">邮箱地址</label>
+    <input type="email" class="form-control"  th:field="*{email}" id="email">
+    <label for="point">会员积分</label>
+    <input type="text" class="form-control"  th:field="*{point}" id="point" value="{300}">
+    <label for="registerDate">注册时间</label>
+    <input type="datetime" class="form-control"  th:field="*{registerDate}" id="registerDate">
+    <input type="hidden" name="curMode" id="curMode">
+    <input type="hidden" name="id" th:field="*{id}">
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a type="button" class="btn btn-secondary" th:href="@{/home}">Cancel</a>
+</form>
+<div th:replace="~{fragments/footer ::footer}"/>
+</body>
+</html>

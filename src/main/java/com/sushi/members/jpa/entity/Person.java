@@ -1,0 +1,25 @@
+package com.sushi.members.jpa.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.LocalDate;
+
+
+@Entity
+@Data
+@Table(name = "Persons")
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
+    private String username;
+    private String phoneNum;
+    @Column(name = "wechat")
+    private String wechat;
+    private String email;
+    private Long Point;
+    private String Status;
+    private LocalDate registerDate;
+}

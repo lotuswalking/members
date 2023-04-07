@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <div th:replace="~{fragments/header::header}"/>
+</head>
+<body>
+<div th:replace="~{fragments/header::nav1}"/>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/store/new}" class="btn btn-primary btn-sm mb-3"> 增加门店</a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="primary">
+        <tr>
+            <th>门店编号</th>
+            <th>门店名称</th>
+            <th>门店地址</th>
+            <th>联系电话</th>
+            <th>店长</th>
+            <th>门店级别</th>
+            <th>上级门店</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="store : ${stores}">
+            <td th:text="${store.getId()}"></td>
+            <td th:text="${store.getStorename()}"></td>
+            <td th:text="${store.getStoreAddress()}"></td>
+            <td th:text="${store.getStoreContactNumber()}"></td>
+            <td th:text="${store.getStoreAdmin()}"></td>
+            <td th:text="${store.getStoreLevel()}"></td>
+            <td th:if="${store.getParentStoreId() != null}" th:text="${store.getParentStoreId()}"></td>
+            <td th:if="${store.getParentStoreId() == null}" th:text="顶级门店"></td>
+<!--            <td th:text="${store.getParentStore()?store.getParentStore().getStorename():'顶级门店'}"></td>-->
+
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>
