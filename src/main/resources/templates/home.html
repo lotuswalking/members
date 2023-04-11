@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <div th:replace="~{fragments/header::header}"/>
 </head>
@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-3">
             <a th:href="@{/person/new}" class="btn btn-primary btn-sm mb-3"> 增加会员</a>
-            <a th:href="@{/person/printAll}" target="_blank" class="btn btn-primary btn-sm mb-3"> 导出会员</a>
+            <a th:href="@{/export-to-csv}" target="_blank" class="btn btn-primary btn-sm mb-3" sec:authorize="hasAuthority('ADMIN')"> 导出会员</a>
         </div>
     </div>
     <table class="table table-striped table-bordered">
@@ -21,6 +21,7 @@
             <th>微信账号</th>
             <th>邮箱地址</th>
             <th>注册时间</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +31,10 @@
             <td th:text="${person.getWechat()}"></td>
             <td th:text="${person.getEmail()}"></td>
             <td th:text="${person.getRegisterDate()}"></td>
+            <td>
+                <a type="button" class="btn btn-link" th:href="@{/person/edit/{id}(id=${person.id})}" >编辑</a>
+                <a type="button" class="btn btn-link" th:href="@{/person/remove/{id}(id=${person.id})}" sec:authorize="hasAuthority('ADMIN')" >删除</a>
+            </td>
         </tr>
         </tbody>
     </table>

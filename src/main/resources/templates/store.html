@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
   <div th:replace="~{fragments/header::header}"/>
   </head>
@@ -23,7 +24,11 @@
     <label for="storeContactNumber">联系电话</label>
     <input type="text" class="form-control"  th:field="*{storeContactNumber}" id="storeContactNumber">
     <label for="storeLevel">门店级别</label>
-    <input type="number" class="form-control"  th:field="*{storeLevel}" id="storeLevel">
+    <select class="form-control" th:field="*{storeLevel}" id="storeLevel">
+      <option th:value="1" th:text="顶级"></option>
+      <option th:value="2" th:text="一级"></option>
+      <option th:value="3" th:text="二级"></option>
+    </select>
     <label for="parentStoreId">上级门店编号</label>
     <input type="text" class="form-control" name="parentStoreId" th:field="*{parentStoreId}" id="parentStoreId">
     <label for="storeAdmin">门店经理</label>

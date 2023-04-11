@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
   <div th:replace="~{fragments/header::header}"/>
 </head>
@@ -22,17 +22,22 @@
       <th>生效时间</th>
       <th>用户角色</th>
       <th>用户门店</th>
+      <th>操作</th>
 <!--      <th>密码</th>-->
     </tr>
     </thead>
     <tbody>
     <tr th:each="user : ${users}">
-      <td th:text="${user.getUsername()}"></td>
-      <td th:text="${user.getDisplayName()}"></td>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.displayName}"></td>
       <td th:text="${user.isActive()}"></td>
       <td th:text="${user.getEffectiveData()}"></td>
-      <td th:text="${user.getRoles()}"></td>
+      <td th:text="${user.getAuthorities()}"></td>
       <td th:text="${user.getScopes()}"></td>
+      <td>
+        <a type="button" class="btn btn-link" th:href="@{/user/edit/{id}(id=${user.id})}" >编辑</a>
+        <a type="button" class="btn btn-link" th:href="@{/user/remove/{id}(id=${user.id})}" sec:authorize="hasAuthority('ADMIN')" >删除</a>
+      </td>
 <!--      <td th:text="${user.getPassword()}"></td>-->
     </tr>
     </tbody>

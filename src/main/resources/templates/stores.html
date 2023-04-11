@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <div th:replace="~{fragments/header::header}"/>
 </head>
@@ -21,7 +21,8 @@
             <th>联系电话</th>
             <th>店长</th>
             <th>门店级别</th>
-            <th>上级门店</th>
+            <th>上级门店编号</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +35,10 @@
             <td th:text="${store.getStoreLevel()}"></td>
             <td th:if="${store.getParentStoreId() != null}" th:text="${store.getParentStoreId()}"></td>
             <td th:if="${store.getParentStoreId() == null}" th:text="顶级门店"></td>
+            <td>
+                <a type="button" class="btn btn-link" th:href="@{/store/edit/{id}(id=${store.id})}" >编辑</a>
+                <a type="button" class="btn btn-link" th:href="@{/store/remove/{id}(id=${store.id})}" sec:authorize="hasAuthority('ADMIN')" >删除</a>
+            </td>
 <!--            <td th:text="${store.getParentStore()?store.getParentStore().getStorename():'顶级门店'}"></td>-->
 
         </tr>

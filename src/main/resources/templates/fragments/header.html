@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <th:block th:fragment="header">
         <meta charset="utf-8">
@@ -29,11 +30,30 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/members}">会员管理</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="nav-link" th:href="@{/stores}">门店管理</a>
+                <li class="nav-item" >
+                     <a class="nav-link" th:href="@{/stores}" sec:authorize ="hasAuthority('ADMIN')">门店管理</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/users}">用户管理</a>
+                    <a class="nav-link" th:href="@{/users}" sec:authorize ="hasAuthority('ADMIN')">用户管理</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item"> <span class="navbar-text">Welcome: <span  th:remove="tag" sec:authentication="principal.displayName">thymeleaf</span></span></li>
+                <li class="nav-item">
+                    <span class="navbar-text">  Roles:
+                        <span lass="navbar-text" th:remove="tag" sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+                    </span>
+                </li>
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                         aria-labelledby="navbarDropdownMenuLink-333">
+                        <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                        <a class="dropdown-item" th:href="@{/}">Home Page</a>
+                    </div>
                 </li>
             </ul>
         </div>

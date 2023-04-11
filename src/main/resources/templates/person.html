@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
   <div th:replace="~{fragments/header::header}"/>
   </head>
@@ -22,6 +23,12 @@
     <input type="text" class="form-control"  th:field="*{wechat}" id="wechat">
     <label for="email">邮箱地址</label>
     <input type="email" class="form-control"  th:field="*{email}" id="email">
+    <label for="Status">会员状态</label>
+    <select  type="text" class="form-control"  th:field="*{Status}" id="Status" value="注册">
+      <option th:each="type : ${allTypes}"
+              th:value="${type.key}"
+              th:text="${type.value}">Thymeleaf</option>
+    </select>
     <label for="point">会员积分</label>
     <input type="text" class="form-control"  th:field="*{point}" id="point" value="{300}">
     <label for="registerDate">注册时间</label>

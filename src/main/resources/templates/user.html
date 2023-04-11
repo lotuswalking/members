@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
   <div th:replace="~{fragments/header::header}"/>
 </head>
@@ -20,15 +21,25 @@
     <input type="text" class="form-control" th:field="*{username}" id="username"  >
     <label for="password">密码</label>
     <input type="password" class="form-control"  th:field="*{password}" id="password">
-    <label for="roles">角色</label>
-    <input type="text" class="form-control"  th:field="*{roles}" id="roles">
+    <div class="form-control">
+      <label for="roles">角色</label>
+      <!--    <input type="text" class="form-control"  th:field="*{roles}" id="roles">-->
+      <input type="checkbox" name="roles" id="roles"
+             th:each="role : ${allRoles}"
+             th:text="${role.roleName}"
+             th:value="${role.roleId}"
+             th:field="*{roles}"
+      />
+    </div>
+
+
     <label for="scopes">门店</label>
     <input type="text" class="form-control"  th:field="*{scopes}" id="scopes">
     <label for="effectiveData">生效时间</label>
     <input type="datetime" class="form-control"  th:field="*{effectiveData}" id="effectiveData">
     <input type="hidden" name="curMode" id="curMode">
     <input type="hidden" name="id" th:field="*{id}">
-    <input type="hidden" name="activeFlag" th:field="*{activeFlag}">
+    <input type="hidden" name="active" th:field="*{active}">
   </div>
   <button type="submit" class="btn btn-primary">Save</button>
   <a type="button" class="btn btn-secondary" th:href="@{/users}">Cancel</a>
