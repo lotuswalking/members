@@ -4,12 +4,14 @@ import com.sushi.members.jpa.RoleRepository;
 import com.sushi.members.jpa.UserRepository;
 import com.sushi.members.jpa.entity.Role;
 import com.sushi.members.jpa.entity.User;
+import jakarta.validation.Valid;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -64,8 +66,12 @@ public class UserController {
 
     @PostMapping(value = "/user/save")
     public String saveUSer(@RequestParam(value = "curMode", required = false) String curMode,
-                             @ModelAttribute User user) {
-
+                             @Valid @ModelAttribute User user,
+                           BindingResult result
+    ) {
+        if(result.hasErrors()) {
+            return "user";
+        }
         String passwordHash=String.valueOf(user.getPassword().hashCode());
         user.setPassword(passwordHash);
 //        user.setRoles(user.getRoles().toUpperCase());

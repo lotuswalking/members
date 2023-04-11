@@ -25,18 +25,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements UserDetails {
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
 
-    @NotEmpty
+    @NotEmpty(message = "用户账号不能为空！")
     @Column(name = "username")
     private String username;
-    @NotEmpty
+    @NotEmpty(message = "用户姓名不能为空！")
     private String displayName;
     private boolean active;
     @Column(name = "effectiveData")

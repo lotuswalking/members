@@ -15,12 +15,15 @@
 
 <form th:action="@{'/user/save'}" th:object="${user}" method="post">
   <div class="form-group">
-    <label for="displayName">用户姓名</label>
-    <input type="text" class="form-control" th:field="*{displayName}" id="displayName"  >
-    <label for="username">用户账号</label>
+    <label for="displayName">用户姓名</label><span class="text-danger">*</span>
+    <input type="text" class="form-control" th:field="*{displayName}" id="displayName" placeholder="用户姓名" >
+    <div class="alert alert-warning" th:if="${#fields.hasErrors('displayName')}" th:errors="*{displayName}"></div>
+    <label for="username">用户账号</label><span class="text-danger">*</span>
     <input type="text" class="form-control" th:field="*{username}" id="username"  >
+    <div class="alert alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
     <label for="password">密码</label>
     <input type="password" class="form-control"  th:field="*{password}" id="password">
+    <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     <div class="form-control">
       <label for="roles">角色</label>
       <!--    <input type="text" class="form-control"  th:field="*{roles}" id="roles">-->
